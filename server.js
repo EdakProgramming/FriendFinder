@@ -1,0 +1,25 @@
+// Create dependencies
+var express = require("express");
+var bodyParser = require("body-parser");
+
+
+// Tells Node that we are creating an "express" server
+var app = express();
+
+// Sets a port for the application to listen on
+var PORT = process.env.PORT || 8080;
+
+// bodyParser allows us to convert data to a desired format
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json"}));
+
+
+// Route files
+require("./app/routing/survey-routes.js");
+
+// Starting up server
+app.listen(PORT, function() {
+	console.log('App listening on PORT: ' + PORT);
+});
