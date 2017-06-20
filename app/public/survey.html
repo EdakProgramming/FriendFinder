@@ -125,22 +125,24 @@
         choicesOrder: "asc"
     }];
 
+// Ask about converting this JSON data to string to add to variable below
+var questionHTML = "<h3>Question <span id=\"question-number\"" + JSON data
+                     + "></span></h3>"+
+                   "<h4 id=\"question-text\">" + JSON data + "</h4>" +
+                   "<form action=\"'/api/friends'\">" +
+                   "<input type=\"radio\" name=\"options\">" +
+                   "</form>";
 
-    function surveyHTML(surveyJSON) {
-        for (var i = 0; i < surveyJSON.lenght; i++) {
-            console.log("function");
-            $(".question").append(function() {
-                var questionContent = "<h3>Question <span id=\"question-number\"" + surveyJSON[i] + "></span></h3>";
-                questionContent += "<h4 id=\"question-text\"></h4>";
-                questionContent += "<form action=\"'/api/friends'\">";
-                questionContent += "<input type=\"radio\" name=\"options\">";
-                questionContent += "</form>";
-
-            }); //apend
+// Ask Carlos to help me clarify this issue of not being able to populate the questions
+    $(document).ready(function() {
+      for (var i = 0; i < surveyJSON.length; i++) {
+            $(".question").append(questionHTML);
         }
-    }
+    }); //End of .ready()
 
-    surveyHTML(surveyJSON);
+
+    // $("#question-number").append(surveyJSON[i].number);
+    //         $("#question-text").text(surveyJSON[i].title);
 
     // .then(function() {
     // } 
