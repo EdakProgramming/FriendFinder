@@ -1,6 +1,7 @@
 // Create dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
+var surveyRoutes = require("./app/routing/survey-routes.js");
 
 
 // Tells Node that we are creating an "express" server
@@ -16,8 +17,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json"}));
 
 
-// Route files
-require("./app/routing/survey-routes.js");
+surveyRoutes(app);
 
 // Starting up server
 app.listen(PORT, function() {

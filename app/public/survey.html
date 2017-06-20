@@ -6,7 +6,6 @@
     <title>Friend Finder</title>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-   
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -15,22 +14,156 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Mobile first design-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+        background-color: #fff;
+        .btn-green {
+            background-color: #1ab394;
+            color: #fff;
+            border-radius: 3px;
+            &:hover,
+            &:focus {
+                background-color: #18a689;
+                color: #fff;
+            }
+        }
+        .my-rating {
+            font-size: 12px;
+        }
+        .panel-footer {
+            background-color: #fff;
+            text-align: right;
+        }
+        .container {
+            margin-left: 0px;
+        }
+    }
+    </style>
 </head>
 
 <body>
-     <h1> SURVEY PAGE</h1>
-   <footer class="footer">
-      <div class="container">
-        <p> Created by EdAk | <a href="https://github.com/EdakProgrammingSolutions/FriendFinder" target="_blank">Project's Repo</a></p>
-      </div>
+    <div id="info-bar" style="margin-left: 2%">
+        <h2> Let's find your best match</h2>
+        <hr>
+        <h3><strong>Tell us about you</strong></h3>
+    </div>
+    <div class="container" id="personal-info">
+        <div class="col-lg-6">
+            <p>Name (Required)</p>
+            <input type="text" class="form-control" id="name" placeholder="Kanye West" required>
+            <br>
+            <p> Link to a photo of you (Required)</p>
+            <input type="file" id="photo" required>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <!-- Div contains the questions -->
+    <div class="container" id="surveyContainer"> <h1>Questions should go here</h1>
+        <div class="question"></div>
+    </div>
+    <!-- Div displays the answers -->
+    <div id="result"></div>
+    <footer class="footer">
+        <div class="container">
+            <p> Created by EdAk | <a href="https://github.com/EdakProgrammingSolutions/FriendFinder" target="_blank">Project's Repo</a></p>
+        </div>
     </footer>
+    </div>
+    <!-- JS Logic to calculate totals -->
+    <script>
+    var surveyJSON = [{
+        number: "1",
+        title: "Your mind is always buzzing with unexplored ideas and plans.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "2",
+        title: "Generally speaking, you rely more on your experience than your imagination.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "3",
+        title: "You find it easy to stay relaxed and focused even when there is some pressure.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "4",
+        title: "You rarely do something just out of sheer curiosity.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "5",
+        title: "People can rarely upset you.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "6",
+        title: "It is often difficult for you to relate to other people’s feelings.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "7",
+        title: "In a discussion, truth should be more important than people’s sensitivities.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "8",
+        title: "You rarely get carried away by fantasies and ideas.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "9",
+        title: "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }, {
+        number: "10",
+        title: "You feel more energetic after spending time with a group of people.",
+        choices: ["1 (Strongly Disagree)", "2", "3 (Agree)", "4", "5 (Strongly Agree)"],
+        choicesOrder: "asc"
+    }];
 
-  </div>
 
+    function surveyHTML(surveyJSON) {
+        for (var i = 0; i < surveyJSON.lenght; i++) {
+            console.log("function");
+            $(".question").append(function() {
+                var questionContent = "<h3>Question <span id=\"question-number\"" + surveyJSON[i] + "></span></h3>";
+                questionContent += "<h4 id=\"question-text\"></h4>";
+                questionContent += "<form action=\"'/api/friends'\">";
+                questionContent += "<input type=\"radio\" name=\"options\">";
+                questionContent += "</form>";
+
+            }); //apend
+        }
+    }
+
+    surveyHTML(surveyJSON);
+
+    // .then(function() {
+    // } 
+    //   for(var n = 0; n < surveyJSON.length; n++) {
+    //     $("#question-number").append(surveyJSON[n]);
+    //     $("#question-text").text(surveyJSON[n]);
+    //   } //End of insert questions loop
+    // })
+    //end of .ready()
+
+
+
+    // function sendDataToServer(survey) {
+
+    // }
+    // var survey = new Survey.Model(surveyJSON);
+    // $("#surveyContainer").Survey({
+    //     model: survey,
+    //     onComplete: sendDataToServer
+    // });
+    </script>
+    <!-- jQuery CDN -->
+    <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-   
-
-
